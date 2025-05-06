@@ -1,29 +1,24 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
+import NavigationTabs from "@/components/NavigationTabs.vue";
 </script>
 
 <template>
-  <h1 class="fs-4 fw-semibold">Timetable</h1>
-  <RouterView />
+  <main class="container py-3 py-md-5">
+    <h1 class="fs-4 fw-semibold">Timetable</h1>
+    <NavigationTabs class="mt-2 mt-md-4 mb-3" />
+    <RouterView />
+  </main>
 </template>
 
 <style lang="scss">
-$dark: #1a1a1a;
-$primary: #1952e1;
-$primary-dark: #2e3e6e;
-$grey: #9a9da4;
-$grey-dark: #33373c;
-
 body {
-  background: #f3f4f9;
   font-family: Inter, sans-serif;
-  padding: 2.5rem 2rem;
   min-height: 100dvh;
 
   h1 {
-    margin-bottom: 1.5rem;
     line-height: 2rem;
-    color: $dark;
+    color: var(--bs-dark);
   }
 }
 </style>

@@ -1,0 +1,10 @@
+@import "bootstrap/scss/bootstrap";
+
+:root,
+[data-bs-theme="light"] {
+  --bs-body-bg: #f3f4f9;
+  --bs-dark: #1a1a1a;
+  --bs-grey: #9A9DA4;
+  --bs-primary: #1952E1;
+  --bs-secondary: #2E3E6E;
+}

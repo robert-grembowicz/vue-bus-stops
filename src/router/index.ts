@@ -1,14 +1,15 @@
+import { ROUTES } from "@/consts/routes";
 import BusLinesView from "@/views/BusLinesView.vue";
 import StopsView from "@/views/StopsView.vue";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
+    path: ROUTES.home,
     component: BusLinesView,
   },
   {
-    path: "/stops",
+    path: ROUTES.stops,
     component: StopsView,
   },
 ];
