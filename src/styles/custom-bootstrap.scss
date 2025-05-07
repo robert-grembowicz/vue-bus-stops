@@ -7,4 +7,9 @@
   --bs-grey: #9A9DA4;
   --bs-primary: #1952E1;
   --bs-secondary: #2E3E6E;
+  
+  .btn-primary {
+    --bs-btn-hover-bg: var(--bs-secondary);
+    --bs-btn-active-bg: var(--bs-secondary);
+  }
 }

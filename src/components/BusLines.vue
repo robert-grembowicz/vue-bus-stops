@@ -3,10 +3,12 @@ import { computed } from "vue";
 import ContentBox from "./ContentBox.vue";
 import SectionHeading from "./SectionHeading.vue";
 import { IState } from "@/store";
+import { TSelectedLine } from "@/views/BusLinesView.vue";
 
 const props = defineProps<{
   heading: string;
   lines: IState["lines"];
+  selectedLine: TSelectedLine;
 }>();
 
 const sortedLines = computed(() => [...props.lines].sort((a, b) => a - b));
@@ -21,6 +23,8 @@ const sortedLines = computed(() => [...props.lines].sort((a, b) => a - b));
         :key="line"
         type="button"
         class="btn btn-primary"
+        :class="{ active: selectedLine === line }"
+        @click="$emit('selectLine', line)"
       >
         {{ line }}
       </button>

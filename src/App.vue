@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { watch } from "vue";
 import { RouterView } from "vue-router";
 import NavigationTabs from "@/components/NavigationTabs.vue";
 import { TStops } from "@/types/stops";
 import { useFetch } from "@/composables/useFetch";
-import { watch } from "vue";
 import { useStore } from "@/store";
 
 const { data, error, loading } = useFetch<TStops>(
