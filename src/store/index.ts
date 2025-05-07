@@ -2,9 +2,10 @@ import { IStop, TStops } from "@/types/stops";
 import { InjectionKey } from "vue";
 import { createStore, useStore as baseUseStore, Store } from "vuex";
 
+export type TStopsState = Omit<IStop, "time">[];
 export interface IState {
   lines: number[];
-  stops: Pick<IStop, "stop" | "order">[];
+  stops: TStopsState;
   timeTable: {
     [x: number]: {
       stops: Array<{
@@ -29,7 +30,7 @@ export default createStore<IState>({
     setLines(state, lines: number[]) {
       state.lines = lines;
     },
-    setStops(state, stops: Pick<IStop, "stop" | "order">[]) {
+    setStops(state, stops: TStopsState) {
       state.stops = stops;
     },
     setTimeTable(state, timeTable: IState["timeTable"]) {
@@ -40,14 +41,14 @@ export default createStore<IState>({
     processStops({ commit }, stops: TStops) {
       const lines = [...new Set(stops.map((item) => item.line))];
 
-      const stopList: Pick<IStop, "stop" | "order">[] = [];
+      const stopList: TStopsState = [];
       const stopSet = new Set<string>();
 
-      stops.forEach(({ stop, order }) => {
+      stops.forEach(({ stop, order, line }) => {
         const key = `${stop}-${order}`;
         if (!stopSet.has(key)) {
           stopSet.add(key);
-          stopList.push({ stop, order });
+          stopList.push({ stop, order, line });
         }
       });
 
@@ -78,6 +79,13 @@ export default createStore<IState>({
       commit("setLines", lines);
       commit("setStops", stopList);
       commit("setTimeTable", timeTable);
+    },
+
+    getStopsByLine({ state }, lineNumber: number) {
+      const filteredStops = state.stops.filter(
+        (item) => item.line === lineNumber
+      );
+      return filteredStops;
     },
   },
 });

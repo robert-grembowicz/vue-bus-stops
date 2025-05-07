@@ -14,6 +14,12 @@ const selectedLine = ref<TSelectedLine>(null);
 function selectLine(line: number) {
   selectedLine.value = line;
 }
+
+const selectedStop = ref<string | null>(null);
+
+function selectStop(stop: string) {
+  selectedStop.value = stop;
+}
 </script>
 
 <template>
@@ -26,10 +32,20 @@ function selectLine(line: number) {
   <div class="mt-4 container">
     <div class="row g-4">
       <div class="col-6 ps-0">
-        <BusStops :selectedLine="selectedLine" class="box" />
+        <BusStops
+          :selectedLine="selectedLine"
+          class="box"
+          @selectStop="selectStop"
+          :selectedStop="selectedStop"
+        />
       </div>
       <div class="col-6 pe-0">
-        <BusStops :selectedLine="selectedLine" class="box" />
+        <BusStops
+          :selectedLine="selectedLine"
+          class="box"
+          @selectStop="selectStop"
+          :selectedStop="selectedStop"
+        />
       </div>
     </div>
   </div>
