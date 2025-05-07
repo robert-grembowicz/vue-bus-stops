@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ROUTES } from "@/consts/routes";
+import ContentBox from "./ContentBox.vue";
 
 const tabs = [
   { path: ROUTES.home, label: "Bus Lines" },
@@ -8,23 +9,23 @@ const tabs = [
 </script>
 
 <template>
-  <ul class="nav nav-tabs border-0 rounded">
-    <li v-for="tab in tabs" :key="tab.path" class="nav-item">
-      <RouterLink
-        :to="tab.path"
-        class="nav-link px-4"
-        :class="{ active: $route.path === tab.path }"
-      >
-        {{ tab.label }}
-      </RouterLink>
-    </li>
-  </ul>
+  <ContentBox class="px-4">
+    <ul class="nav nav-tabs border-0">
+      <li v-for="tab in tabs" :key="tab.path" class="nav-item">
+        <RouterLink
+          :to="tab.path"
+          class="nav-link px-4"
+          :class="{ active: $route.path === tab.path }"
+        >
+          {{ tab.label }}
+        </RouterLink>
+      </li>
+    </ul>
+  </ContentBox>
 </template>
 
 <style scoped lang="scss">
 .nav-tabs {
-  background: var(--bs-white);
-
   .nav-link {
     position: relative;
     display: flex;
