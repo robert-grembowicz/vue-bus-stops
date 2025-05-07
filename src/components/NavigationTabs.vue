@@ -34,6 +34,7 @@ const tabs = [
     color: var(--bs-grey);
     transition: color $transition;
     height: 4rem;
+    font-size: 0.9rem;
 
     &:hover {
       color: var(--bs-dark);

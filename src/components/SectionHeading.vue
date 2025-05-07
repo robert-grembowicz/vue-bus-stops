@@ -1,5 +1,5 @@
 <template>
-  <h4 class="fw-semibold">
+  <h2 class="fw-semibold fs-6">
     <slot />
-  </h4>
+  </h2>
 </template>
