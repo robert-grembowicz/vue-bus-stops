@@ -2,16 +2,14 @@
 import { computed } from "vue";
 import ContentBox from "./ContentBox.vue";
 import SectionHeading from "./SectionHeading.vue";
-import { TStops } from "@/api/stops";
+import { IState } from "@/store";
 
 const props = defineProps<{
   heading: string;
-  stops: TStops;
+  lines: IState["lines"];
 }>();
 
-const sortedStops = computed(() =>
-  [...props.stops].sort((a, b) => a.line - b.line)
-);
+const sortedLines = computed(() => [...props.lines].sort((a, b) => a - b));
 </script>
 
 <template>
@@ -19,12 +17,12 @@ const sortedStops = computed(() =>
     <SectionHeading>{{ props.heading }}</SectionHeading>
     <div class="d-flex gap-2 mt-4">
       <button
-        v-for="stop in sortedStops"
-        :key="stop.line"
+        v-for="line in sortedLines"
+        :key="line"
         type="button"
         class="btn btn-primary"
       >
-        {{ stop.line }}
+        {{ line }}
       </button>
     </div>
   </ContentBox>
