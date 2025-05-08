@@ -54,7 +54,7 @@ watch(
           <ArrowIcon />
         </button>
       </SectionHeader>
-      <ListWrapper label="Bus stops table">
+      <ListWrapper label="Bus stops table" :max-height="333">
         <ListItem
           v-for="{ stop, order } in filteredStops"
           :key="stop + order"

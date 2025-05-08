@@ -54,7 +54,7 @@ const sortedLineTimeTable = computed(() => sortTime(lineTimeTable.value));
     :default-text="!selectedStop && defaultText"
   >
     <SectionHeader :heading="`Bus stop: ${selectedStop}`" subheading="Time" />
-    <ListWrapper label="Bus timetable list">
+    <ListWrapper label="Bus timetable list" :max-height="333">
       <ListItem v-for="(time, index) in sortedLineTimeTable" :key="index">
         {{ time }}
       </ListItem>

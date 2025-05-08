@@ -43,7 +43,7 @@ onMounted(() => {
       >
         <ArrowIcon /></button
     ></SectionHeader>
-    <ListWrapper label="Bus stops table">
+    <ListWrapper label="Bus stops table" :is-flexible="true">
       <ListItem v-for="{ stop, order } in filteredStops" :key="stop + order">
         {{ stop }} ({{ order }})
       </ListItem>
