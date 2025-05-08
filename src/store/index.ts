@@ -3,16 +3,19 @@ import { InjectionKey } from "vue";
 import { createStore, useStore as baseUseStore, Store } from "vuex";
 
 export type TStopsState = Omit<IStop, "time">[];
+
+export type IStopState = {
+  order: IStop["order"];
+  name: IStop["stop"];
+  times: Array<IStop["time"]>;
+};
+
 export interface IState {
   lines: number[];
   stops: TStopsState;
   timeTable: {
     [x: number]: {
-      stops: Array<{
-        order: IStop["order"];
-        name: IStop["stop"];
-        times: Array<IStop["time"]>;
-      }>;
+      stops: Array<IStopState>;
     };
   };
 }

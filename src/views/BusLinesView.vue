@@ -1,21 +1,29 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import BusLines from "@/components/BusLines.vue";
-import { useStore } from "@/store";
+import { IStopState, useStore } from "@/store";
 import BusStops from "@/components/BusStops.vue";
+import TimeTable from "@/components/TimeTable.vue";
 
 export type TSelectedLine = null | number;
 
 const store = useStore();
+
 const lines = computed(() => store.state.lines);
 
 const selectedLine = ref<TSelectedLine>(null);
+const selectedStop = ref<string | null>(null);
+const timeTable = ref<IStopState[]>([]);
 
 function selectLine(line: number) {
   selectedLine.value = line;
+  selectedStop.value = null;
+  console.log(
+    "store.state.timeTable[line].stops",
+    store.state.timeTable[line].stops
+  );
+  timeTable.value = store.state.timeTable[line].stops;
 }
-
-const selectedStop = ref<string | null>(null);
 
 function selectStop(stop: string) {
   selectedStop.value = stop;
@@ -40,18 +48,18 @@ function selectStop(stop: string) {
         />
       </div>
       <div class="col-6 pe-0">
-        <BusStops
+        <TimeTable
           :selectedLine="selectedLine"
           class="box"
-          @selectStop="selectStop"
           :selectedStop="selectedStop"
+          :timeTable="timeTable"
         />
       </div>
     </div>
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .box {
   height: 444px;
 }

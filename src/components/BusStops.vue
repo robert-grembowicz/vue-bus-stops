@@ -73,6 +73,7 @@ watch(
           v-for="{ stop, order } in filteredStops"
           :key="stop + order"
           :is-selected="selectedStop === stop"
+          role="option"
           @click="$emit('selectStop', stop)"
           @keydown.enter.space="$emit('selectStop', stop)"
         >

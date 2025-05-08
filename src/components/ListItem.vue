@@ -1,14 +1,17 @@
 <script setup lang="ts">
+import { HTMLAttributes } from "vue";
+
 defineProps<{
-  isSelected: boolean;
+  isSelected?: boolean;
+  role?: HTMLAttributes["role"];
 }>();
 </script>
 
 <template>
   <li
-    class="list-group-item list-group-item-action p-3"
-    :class="{ active: isSelected }"
-    role="option"
+    class="list-group-item p-3"
+    :class="{ active: isSelected, 'list-group-item-action': role === 'option' }"
+    :role="role || 'text'"
     :aria-selected="isSelected"
     tabindex="0"
   >
