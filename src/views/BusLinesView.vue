@@ -35,7 +35,7 @@ function selectStop(stop: string) {
   />
   <div class="mt-4 container">
     <div class="row g-4">
-      <div class="col-12 col-md-6 ps-0">
+      <div class="col-12 col-md-6 p-0 pe-md-3">
         <BusStops
           :selectedLine="selectedLine"
           class="box"
@@ -43,7 +43,7 @@ function selectStop(stop: string) {
           :selectedStop="selectedStop"
         />
       </div>
-      <div class="col-12 col-md-6 pe-0">
+      <div class="col-12 col-md-6 p-0 ps-md-3">
         <TimeTable
           :selectedLine="selectedLine"
           class="box"
