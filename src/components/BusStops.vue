@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { TSelectedLine } from "@/views/BusLinesView.vue";
 import { useStore, TStopsState } from "@/store";
 import ContentBox from "./ContentBox.vue";
@@ -7,6 +7,7 @@ import ArrowIcon from "./icons/ArrowIcon.vue";
 import SectionHeader from "./SectionHeader.vue";
 import ListItem from "./list/ListItem.vue";
 import ListWrapper from "./list/ListWrapper.vue";
+import { useSortedStops } from "@/composables/useSortedStops";
 
 const props = defineProps<{
   selectedLine: TSelectedLine;
@@ -15,20 +16,8 @@ const props = defineProps<{
 
 const store = useStore();
 const rawStops = ref<TStopsState>([]);
-const sortByOrder = ref(false);
 
-const toggleSort = () => {
-  sortByOrder.value = !sortByOrder.value;
-};
-
-const filteredStops = computed(() => {
-  return [...rawStops.value].sort((a, b) => {
-    if (sortByOrder.value) {
-      return a.order - b.order;
-    }
-    return a.stop.localeCompare(b.stop);
-  });
-});
+const { toggleSort, filteredStops } = useSortedStops(rawStops);
 
 const loadStops = async (line: number) => {
   rawStops.value = await store.dispatch("getStopsByLine", line);

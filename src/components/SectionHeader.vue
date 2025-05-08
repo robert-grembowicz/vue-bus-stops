@@ -2,14 +2,14 @@
 import SectionHeading from "./SectionHeading.vue";
 
 defineProps<{
-  heading: string;
+  heading?: string;
   subheading: string;
 }>();
 </script>
 <template>
   <div class="p-4 container">
-    <SectionHeading>{{ heading }}</SectionHeading>
-    <h3 class="subheader m-0 mt-4">
+    <SectionHeading class="mb-4" v-if="heading">{{ heading }}</SectionHeading>
+    <h3 class="subheader m-0">
       {{ subheading }}
       <slot />
     </h3>
