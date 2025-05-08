@@ -18,10 +18,6 @@ const timeTable = ref<IStopState[]>([]);
 function selectLine(line: number) {
   selectedLine.value = line;
   selectedStop.value = null;
-  console.log(
-    "store.state.timeTable[line].stops",
-    store.state.timeTable[line].stops
-  );
   timeTable.value = store.state.timeTable[line].stops;
 }
 
@@ -39,7 +35,7 @@ function selectStop(stop: string) {
   />
   <div class="mt-4 container">
     <div class="row g-4">
-      <div class="col-6 ps-0">
+      <div class="col-12 col-md-6 ps-0">
         <BusStops
           :selectedLine="selectedLine"
           class="box"
@@ -47,7 +43,7 @@ function selectStop(stop: string) {
           :selectedStop="selectedStop"
         />
       </div>
-      <div class="col-6 pe-0">
+      <div class="col-12 col-md-6 pe-0">
         <TimeTable
           :selectedLine="selectedLine"
           class="box"

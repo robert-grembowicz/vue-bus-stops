@@ -10,7 +10,10 @@ defineProps<{
 <template>
   <li
     class="list-group-item p-3"
-    :class="{ active: isSelected, 'list-group-item-action': role === 'option' }"
+    :class="{
+      selected: isSelected,
+      'list-group-item-action': role === 'option',
+    }"
     :role="role || 'text'"
     :aria-selected="isSelected"
     tabindex="0"
@@ -18,3 +21,13 @@ defineProps<{
     <slot />
   </li>
 </template>
+
+<style scoped lang="scss">
+.list-group-item {
+  color: $grey;
+
+  &.selected {
+    color: var(--bs-primary);
+  }
+}
+</style>

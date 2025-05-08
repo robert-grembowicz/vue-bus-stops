@@ -5,9 +5,10 @@ import ContentBox from "./ContentBox.vue";
 import SectionHeader from "./SectionHeader.vue";
 import { watch } from "vue";
 import { IStopState, useStore } from "@/store";
-import ListItem from "./ListItem.vue";
+import ListItem from "./list/ListItem.vue";
 import { ref } from "vue";
 import { sortTime } from "@/helpers/sortTime";
+import ListWrapper from "./list/ListWrapper.vue";
 
 const props = defineProps<{
   selectedLine: TSelectedLine;
@@ -28,8 +29,6 @@ watch(
   () => props.selectedLine,
   (newVal) => {
     if (!newVal) return;
-    console.log("newVal", newVal);
-    console.log(" store.state.timeTable", store.state.timeTable);
     timeTable.value = store.state.timeTable[newVal].stops;
   }
 );
@@ -38,7 +37,6 @@ watch(
   () => props.selectedStop,
   (stopName) => {
     if (!stopName) return;
-    console.log("timeTable.value", timeTable.value);
     const filteredTimeTable = timeTable.value?.filter(
       (item) => item.name === stopName
     );
@@ -56,31 +54,10 @@ const sortedLineTimeTable = computed(() => sortTime(lineTimeTable.value));
     :default-text="!selectedStop && defaultText"
   >
     <SectionHeader :heading="`Bus stop: ${selectedStop}`" subheading="Time" />
-    <ul
-      class="list-group list-group-flush"
-      role="listbox"
-      aria-label="Bus stops list"
-    >
+    <ListWrapper label="Bus timetable list">
       <ListItem v-for="(time, index) in sortedLineTimeTable" :key="index">
         {{ time }}
       </ListItem>
-    </ul>
+    </ListWrapper>
   </ContentBox>
 </template>
-
-<style scoped lang="scss">
-.list-group {
-  max-height: 333px;
-  overflow: scroll;
-}
-
-.list-group-item {
-  color: $grey;
-
-  &.active {
-    background: $lightgrey;
-    color: $grey;
-    border-color: $lightgrey;
-  }
-}
-</style>

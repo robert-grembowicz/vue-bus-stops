@@ -17,7 +17,7 @@ const sortedLines = computed(() => [...props.lines].sort((a, b) => a - b));
 <template>
   <ContentBox class="p-4">
     <SectionHeading>{{ props.heading }}</SectionHeading>
-    <div class="d-flex gap-2 mt-4">
+    <div class="d-flex gap-2 mt-4 flex-wrap">
       <button
         v-for="line in sortedLines"
         :key="line"

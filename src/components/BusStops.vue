@@ -5,7 +5,8 @@ import { useStore, TStopsState } from "@/store";
 import ContentBox from "./ContentBox.vue";
 import ArrowIcon from "./icons/ArrowIcon.vue";
 import SectionHeader from "./SectionHeader.vue";
-import ListItem from "./ListItem.vue";
+import ListItem from "./list/ListItem.vue";
+import ListWrapper from "./list/ListWrapper.vue";
 
 const props = defineProps<{
   selectedLine: TSelectedLine;
@@ -64,11 +65,7 @@ watch(
           <ArrowIcon />
         </button>
       </SectionHeader>
-      <ul
-        class="list-group list-group-flush"
-        role="listbox"
-        aria-label="Bus stops list"
-      >
+      <ListWrapper label="Bus stops table">
         <ListItem
           v-for="{ stop, order } in filteredStops"
           :key="stop + order"
@@ -79,25 +76,13 @@ watch(
         >
           {{ stop }} ({{ order }})
         </ListItem>
-      </ul>
+      </ListWrapper>
     </template>
   </ContentBox>
 </template>
 
 <style scoped lang="scss">
-.list-group {
-  max-height: 333px;
-  overflow: scroll;
-}
-
 .list-group-item {
   cursor: pointer;
-  color: $grey;
-
-  &.active {
-    background: $lightgrey;
-    color: $grey;
-    border-color: $lightgrey;
-  }
 }
 </style>
